@@ -50,4 +50,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/enbild" />
+
+    <EditText
+        android:id="@+id/myEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Skriv nåt..."
+        app:layout_constraintBottom_toTopOf="@+id/bilden"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.485"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
