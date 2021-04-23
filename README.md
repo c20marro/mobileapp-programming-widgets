@@ -1,42 +1,118 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+Det första som gjordes efter att jag klonade ner projektet från github var att skapa en linear layout.
+Sedan skapade jag två stycken "textviews" som gavs varsitt ID och ett innehåll av "textview-1" och
+"textview-2", se kodsnutt nedan. 
 
-_Du kan ta bort all text som finns sedan tidigare_.
 
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
-}
+ <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="15dp"
+        android:text="TextView - 1"
+        android:textSize="20sp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="128dp"
+        android:layout_height="58dp"
+        android:background="@color/colorAccent"
+        android:text="TextView - 2"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+Därefter så skapades en ny widget, en knapp. Jag gav denna widget ett id av "myBtn" och texten 
+"Button."
+```
+<Button
+        android:id="@+id/myBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+```
 
-![](android.png)
+Sedan för att kolla om jag hade en fungerande knapp så deklarerades en variabel i min onCreate() där
+jag använde mig findViewById för att lokalisera det ID som gav till min button. Sedan användes den 
+variabeln för att göra en clickListener där något ska hända om en användare klickar på knappen. I detta
+fallet använder jag log.d för att få ett meddelande när knappen klickas på. 
 
-Läs gärna:
+```
+b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("==>","We clicked on the button");
+            }
+        });
+```
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+Sedan impoertade jag en bild till programemt som jagkudne använda för attgöra en imageview. Så jag 
+lade till en imageview i min main.xml fil och gav den ett ID och en description. 
+
+```
+<ImageView
+        android:id="@+id/bilden"
+        android:layout_width="282dp"
+        android:layout_height="366dp"
+        android:contentDescription="froding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/enbild" />
+```
+
+Sedan när jag skulle placera om mina olika widgets med hjälp av margin så gick jag problem med att 
+mina widgets inte gick att flytta på. Alla widget lades på en vertikal rad i mitten av skärmen. 
+Jag fick efter ett litet tag rekommendationen att använda mig av en "constraintLayout" istället för
+en "LinearLayout" då det tydligen är lite mer meck med att få till det i en LinearLayout. 
+Så det jag gjorde då var att gå in i min main.xml fil och konverterade min linearlayout till 
+constraintlayout. 
+
+Sedan använde jag mig av Designläget för att placera några av mina widgets genom att fästa "noder" från
+bilden till alla fyra sidor av min view, på bilden. På så sätt fick jag bilden fint centrerat i mitten.
+
+Sedan ville jag ha min knapp i mitten en bit under bilden. Detta löstes genom att ge den lite margin
+från bottom, enligt kodsnutten nedan kan man se att jag gav min knapp en marginBottom av 70dp. 
+
+```
+ android:layout_marginBottom="70dp"
+```
+
+Den sista widget som jag lade till i min applikaton är en "EditText" som jag gav en placeholder där 
+det står: "skriv nåt...".  Även denna placerade jag som jag ville ha den genom att använda mig av 
+design läget i min main.xml fil. 
+
+```
+ <EditText
+         android:id="@+id/myEdit"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Skriv nåt..."
+         app:layout_constraintBottom_toTopOf="@+id/bilden"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="0.485"
+         tools:ignore="MissingConstraints" />
+```
+
+Nedan visas en screenshot på min färdgiga applikation med alla widgets. 
+
+
+
+![](froding.png)
+
+
